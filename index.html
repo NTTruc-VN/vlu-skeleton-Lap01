@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập</title>
+  <style>
+    body { font-family: system-ui, sans-serif; display: flex; justify-content: center;
+           align-items: center; min-height: 100vh; margin: 0; background: #f4f5f7; }
+    .box { background: #fff; padding: 32px; border-radius: 10px; width: 300px;
+           box-shadow: 0 2px 12px rgba(0,0,0,.1); }
+    h2 { margin: 0 0 20px; }
+    label { display: block; margin-bottom: 4px; font-size: 14px; }
+    input { width: 100%; padding: 8px; margin-bottom: 14px; box-sizing: border-box;
+            border: 1px solid #ccc; border-radius: 5px; }
+    button { width: 100%; padding: 10px; border: 0; border-radius: 5px;
+             background: #2563eb; color: #fff; font-size: 15px; cursor: pointer; }
+    #message { margin-top: 14px; font-size: 14px; text-align: center; }
+    .ok { color: #16a34a; }
+    .err { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Đăng nhập</h2>
+    <form id="loginForm">
+      <label for="username">Tài khoản</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      const msg = document.getElementById('message');
+
+      if (checkLogin(u, p)) {
+        msg.textContent = 'Đăng nhập thành công!';
+        msg.className = 'ok';
+      } else {
+        msg.textContent = 'Sai tài khoản hoặc mật khẩu.';
+        msg.className = 'err';
+      }
+    });
+  </script>
+</body>
+</html>
