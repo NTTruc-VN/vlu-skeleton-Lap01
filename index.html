@@ -2,54 +2,106 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng nhập</title>
   <style>
-    body { font-family: system-ui, sans-serif; display: flex; justify-content: center;
-           align-items: center; min-height: 100vh; margin: 0; background: #f4f5f7; }
-    .box { background: #fff; padding: 32px; border-radius: 10px; width: 300px;
-           box-shadow: 0 2px 12px rgba(0,0,0,.1); }
-    h2 { margin: 0 0 20px; }
-    label { display: block; margin-bottom: 4px; font-size: 14px; }
-    input { width: 100%; padding: 8px; margin-bottom: 14px; box-sizing: border-box;
-            border: 1px solid #ccc; border-radius: 5px; }
-    button { width: 100%; padding: 10px; border: 0; border-radius: 5px;
-             background: #2563eb; color: #fff; font-size: 15px; cursor: pointer; }
-    #message { margin-top: 14px; font-size: 14px; text-align: center; }
-    .ok { color: #16a34a; }
-    .err { color: #dc2626; }
+    :root {
+      --ink: #1c1b18;
+      --paper: #f6f4ef;
+      --line: #d8d3c8;
+      --accent: #2f5d50;
+      --error: #a3402f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+    .card {
+      width: 100%;
+      max-width: 360px;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+      font-family: Arial, sans-serif;
+    }
+    input {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      margin-bottom: 1.1rem;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+    input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    button {
+      width: 100%;
+      padding: 0.65rem;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.9; }
+    #message {
+      margin-top: 1rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      min-height: 1.2em;
+    }
+    #message.success { color: var(--accent); }
+    #message.error { color: var(--error); }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>Đăng nhập</h2>
+  <div class="card">
+    <h1>Đăng nhập hệ thống</h1>
     <form id="loginForm">
       <label for="username">Tài khoản</label>
-      <input type="text" id="username" name="username" required>
+      <input type="text" id="username" name="username" autocomplete="username" required>
 
       <label for="password">Mật khẩu</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
 
       <button type="submit">Đăng nhập</button>
+      <p id="message"></p>
     </form>
-    <p id="message"></p>
   </div>
 
-  <script src="auth.js"></script>
+  <script src="login.js"></script>
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const u = document.getElementById('username').value;
-      const p = document.getElementById('password').value;
-      const msg = document.getElementById('message');
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const messageEl = document.getElementById('message');
 
-      if (checkLogin(u, p)) {
-        msg.textContent = 'Đăng nhập thành công!';
-        msg.className = 'ok';
-      } else {
-        msg.textContent = 'Sai tài khoản hoặc mật khẩu.';
-        msg.className = 'err';
-      }
+      const ok = checkLogin(username, password);
+      messageEl.textContent = ok ? 'Đăng nhập thành công!' : 'Sai tài khoản hoặc mật khẩu.';
+      messageEl.className = ok ? 'success' : 'error';
     });
   </script>
 </body>
