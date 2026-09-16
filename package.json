@@ -1,6 +1,8 @@
 {
-  "name": "login-demo",
+  "name": "vlu-qe-walking-skeleton",
   "version": "1.0.0",
+  "description": "Walking Skeleton - Login form voi CI test tu dong (Lab 01 - Software Testing)",
+  "main": "login.js",
   "scripts": {
     "test": "jest"
   },
