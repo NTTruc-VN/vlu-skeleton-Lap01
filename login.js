@@ -3,7 +3,7 @@
  * Trả về true nếu user = 'admin' và pass = '123', ngược lại trả về false.
  */
 function checkLogin(username, password) {
-  if (username === 'admin' && password === '123') {
+  if (username === 'admin' && password === '1234') {
     return true;
   }
   return false;
